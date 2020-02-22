@@ -1,15 +1,19 @@
 {
-  "name": "twitter_analysis_tool",
-  "version": "0.1.0",
-  "main": "./main.js",
+  "name": "hello-blockstack-webpack",
+  "version": "0.0.0",
+  "description": "A simple Blockstack app",
+  "private": true,
   "scripts": {
-    "start": "electron ."
-  },
-  "dependencies": {
-    "util": "^0.12.1",
-    "twit": "^2.2.11"
+    "build": "webpack",
+    "start": "webpack-dev-server",
+    "test": "webpack"
   },
   "devDependencies": {
-    "electron-prebuilt": "^1.4.13"
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.5.1"
+  },
+  "dependencies": {
+    "blockstack": "^19.2.5"
   }
 }
