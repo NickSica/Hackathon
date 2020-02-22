@@ -9,6 +9,7 @@
     "test": "webpack"
   },
   "devDependencies": {
+    "electron-prebuilt": "^1.4.13",  
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.5.1"
