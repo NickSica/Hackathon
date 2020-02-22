@@ -1,0 +1,15 @@
+{
+  "name": "twitter_analysis_tool",
+  "version": "0.1.0",
+  "main": "./main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "util": "^0.12.1",
+    "twit": "^2.2.11"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^1.4.13"
+  }
+}
