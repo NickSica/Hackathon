@@ -8,8 +8,10 @@
     "start": "tsc && node dist/main.js"
   },
   "devDependencies": {
+    "@electron/typescript-definitions": "^8.6.6",
+    "@types/express": "^4.17.2",
     "@types/node": "^13.7.4",
-    "electron-prebuilt": "^1.4.13",
+    "express": "^4.17.1",
     "tslint": "^6.0.0",
     "typescript": "^3.8.2"
   },

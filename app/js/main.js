@@ -48,7 +48,7 @@ function onAnimFrame() {
 // Handle the start of gestures
   this.handleGestureStart = function(evt) {
     evt.preventDefault();
-    console.log("You touched Neel")
+    html.getElementById("touch_neel").innerHTML = "You touched Neel";
 
     if(evt.touches && evt.touches.length > 1) {
       return;
@@ -104,7 +104,7 @@ function onAnimFrame() {
  
 this.handleGestureMove = function (evt) {
   evt.preventDefault();
-  console.log("You are rubbing neel")
+  html.getElementById("touch_neel").innerHTML = "You are rubbing neel";
 
   if(!initialTouchPos) {
     return;

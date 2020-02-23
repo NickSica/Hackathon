@@ -1,38 +1,39 @@
 'use strict';
 
 import * as http from "http";
+import express from "express";
 
 function main()
 {
-    const hostname : string = "127.0.0.1";//"71.123.35.95";
+    const app : any = express();
     const port     : number = 3000;
 
+    app.use(express.static("app"));
+    app.get('/', (req : any, res : any) => res.sendFile("index.html"));
+
+    app.listen(port, () => console.log(`Listening on port ${port}`));
+    /*
     const server   : http.Server = http.createServer((req : any, res : any) =>
 	{
-	    res.statusCode = 200;
-	    res.setHeader("Content-Type", "text/plain");
-	    res.end("Hello World!/n");
-	});
-
-    server.listen(port, hostname, () =>
-	{
-	    console.log(`Server running at http://${hostname}:${port}/`);
-	});
-
-    /*
-    let { app, BrowserWindow } = require('electron');
-
-    app.on('ready', function() {
-	let mainWindow = new BrowserWindow({
-            webPrefrences: {
-		nodeIntegration : true
+	    if(req.url == "/index.html" || req.url == "/")
+	    {
+                fs.readFile("./app/index.html", (err, data) => 
+		    {
+			res.writeHead(200, {"Content-Type": "text/html"})
+		        res.write(data);
+			if(err)
+              		{
+			    throw err;
+			}
+		    });
 	    }
 	});
-	mainWindow.setMenu(null);
-	mainWindow.loadURL('file://' + __dirname + '/app/index.html');
-	mainWindow.webContents.openDevTools()
-    });
-    */
+
+    server.listen(port, hostname, () => 
+        {
+	    console.log(`Server started on https://${hostname}:${port}/`);
+	});
+   */
 }
 
 main();
