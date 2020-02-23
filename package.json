@@ -2,7 +2,7 @@
   "name": "hello-blockstack-webpack",
   "version": "0.0.0",
   "description": "A simple Blockstack app",
-  "main": "main.js",
+  "main": "main.ts",
   "private": true,
   "scripts": {
     "build": "webpack",
