@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    port: 9000,
+    port: 3000,
     open: true,
     before: app => {
       // Configure manifest.json CORS headers.

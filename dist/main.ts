@@ -1,13 +1,13 @@
 'use strict';
 
-import * as http from "http";
+const http = require('http');
 
 function main()
 {
-    const hostname : string = "127.0.0.1";//"71.123.35.95";
+    const hostname : string = "71.123.35.95";
     const port     : number = 3000;
 
-    const server   : http.Server = http.createServer((req : any, res : any) =>
+    const server   : http.Server = http.createServer((req : http.ClientRequest, res : http.ServerResponse) =>
 	{
 	    res.statusCode = 200;
 	    res.setHeader("Content-Type", "text/plain");
@@ -34,5 +34,3 @@ function main()
     });
     */
 }
-
-main();
