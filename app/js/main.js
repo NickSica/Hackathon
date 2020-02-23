@@ -1,7 +1,54 @@
+var SwipeFrontElement
+var rafPending=false;
+var currentXPosition = 0;
+var currentYPosition = 0;
+
+function getGesturePointFromEvent(evt) {
+    var point = {};
+
+    if(evt.targetTouches) {
+      // Prefer Touch Events
+      point.x = evt.targetTouches[0].clientX;
+      point.y = evt.targetTouches[0].clientY;
+    } else {
+      // Either Mouse event or Pointer Event
+      point.x = evt.clientX;
+      point.y = evt.clientY;
+    }
+
+    return point;
+  }
+
+function onAnimFrame() {
+  if(!rafPending) {
+    return;
+  }
+
+  var differenceInX = initialTouchPos.x - lastTouchPos.x;
+  var differenceInY = initialTouchPos.y - lastTouchPos.y;
+
+  var newXTransform = (currentXPosition - differenceInX)+'px';
+  var newYTransform = (currentYPosition - differenceInY)+'px';
+  
+  var transformStyle = 'translateX('+newXTransform+')';
+  swipeFrontElement.style.webkitTransform = transformStyle;
+  swipeFrontElement.style.MozTransform = transformStyle;
+  swipeFrontElement.style.msTransform = transformStyle;
+  swipeFrontElement.style.transform = transformStyle;
+  transformStyle = 'translateY('+newYTransform+')';
+  swipeFrontElement.style.webkitTransform += transformStyle;
+  swipeFrontElement.style.MozTransform += transformStyle;
+  swipeFrontElement.style.msTransform += transformStyle;
+  swipeFrontElement.style.transform += transformStyle;
+
+
+  rafPending = false;
+}
+
 // Handle the start of gestures
   this.handleGestureStart = function(evt) {
     evt.preventDefault();
-    console.log("LIKE A VIRGIN")
+    console.log("You touched Neel")
 
     if(evt.touches && evt.touches.length > 1) {
       return;
@@ -24,10 +71,20 @@
   // Handle end gestures
   this.handleGestureEnd = function(evt) {
     evt.preventDefault();
+    console.log("you are no longer touching neel")
+
+    endTouchPos = getGesturePointFromEvent(evt);
+    
+    currentXPosition += endTouchPos.x-initialTouchPos.x
+    currentYPosition += endTouchPos.y-initialTouchPos.y
+
+
 
     if(evt.touches && evt.touches.length > 0) {
       return;
     }
+
+
 
     rafPending = false;
 
@@ -40,17 +97,34 @@
       document.removeEventListener('mouseup', this.handleGestureEnd, true);
     }
 
-    updateSwipeRestPosition();
+    //updateSwipeRestPosition();
 
     initialTouchPos = null;
   }.bind(this);
  
+this.handleGestureMove = function (evt) {
+  evt.preventDefault();
+  console.log("You are rubbing neel")
 
+  if(!initialTouchPos) {
+    return;
+  }
+
+  lastTouchPos = getGesturePointFromEvent(evt);
+
+  if(rafPending) {
+    return;
+  }
+
+  rafPending = true;
+
+  window.requestAnimationFrame(onAnimFrame);
+  }.bind(this);
 
 
 window.onload = function() {
    console.log("test");
-  var swipeFrontElement=document.getElementById("picture");
+  swipeFrontElement=document.getElementById("picture");
   console.log(swipeFrontElement.src);
   if (window.PointerEvent) {
     // Add Pointer Event Listener
